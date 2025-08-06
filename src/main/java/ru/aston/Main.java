@@ -22,7 +22,7 @@ public class Main {
 //        UserService userService = new UserService();
 //        userService.add(user);
         menuManager.run();
-        HibernateConfiguration.close();
+        HibernateConfigurationUtils.close();
 
     }
 }
