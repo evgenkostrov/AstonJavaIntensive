@@ -1,13 +1,15 @@
 package ru.aston.dao;
 
+import java.util.Optional;
+
 public interface CommonDAO <T> {
 
-        T get(long id);
+        Optional<T> find(long id);
 
-        void update(T obj);
+        void merge(T obj);
 
-        void delete(long id);
+        void remove(T obj);
 
-        void add(T obj);
+        void persist(T obj);
 
 }

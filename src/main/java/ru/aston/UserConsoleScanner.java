@@ -68,7 +68,7 @@ public class UserConsoleScanner {
         int age = getIntInput();
 
         User user = new User(name, email, age);
-        userService.saveUser(user);
+        userService.persistUser(user);
         System.out.println("Пользователь создан: " + user);
     }
 
@@ -76,7 +76,7 @@ public class UserConsoleScanner {
         System.out.print("Введите ID пользователя: ");
         Long id = getLongInput();
 
-        Optional<User> user = userService.getUserById(id);
+        Optional<User> user = userService.findUserById(id);
         user.ifPresentOrElse(
                 u -> System.out.println("Найден пользователь: " + u),
                 () -> System.out.println("Пользователь с ID " + id + " не найден")
@@ -84,7 +84,7 @@ public class UserConsoleScanner {
     }
 
     private void findAllUsers() {
-        List<User> users = userService.getAllUsers();
+        List<User> users = userService.findAllUsers();
         if (users.isEmpty()) {
             System.out.println("Список пользователей пуст");
         } else {
@@ -97,7 +97,7 @@ public class UserConsoleScanner {
         System.out.print("Введите ID пользователя для обновления: ");
         Long id = getLongInput();
 
-        Optional<User> optionalUser = userService.getUserById(id);
+        Optional<User> optionalUser = userService.findUserById(id);
         if (optionalUser.isEmpty()) {
             System.out.println("Пользователь не найден");
             return;
@@ -118,7 +118,7 @@ public class UserConsoleScanner {
         int age = getIntInput();
         if (age > 0) user.setAge(age);
 
-        userService.updateUser(user);
+        userService.mergeUser(user);
         System.out.println("Данные пользователя обновлены: " + user);
     }
 
@@ -126,16 +126,13 @@ public class UserConsoleScanner {
         System.out.print("Введите ID пользователя для удаления: ");
         Long id = getLongInput();
 
-        Optional<User> user = userService.getUserById(id);
+        Optional<User> user = userService.findUserById(id);
         user.ifPresentOrElse(
                 u -> {
-                    userService.deleteUser(u);
+                    userService.removeUser(u);
                     System.out.println("Пользователь удалён: " + u);
                 },
                 () -> System.out.println("Пользователь с ID " + id + " не найден")
         );
     }
-}
-
-
 }
