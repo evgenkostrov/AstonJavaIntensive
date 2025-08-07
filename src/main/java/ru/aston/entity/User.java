@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +30,14 @@ public class User {
     @Column(name = "created_at", updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
-    public User() {
-    }
-
     public User(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
         this.age = age;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public User(long l, String updatedName) {
     }
 
     @PrePersist

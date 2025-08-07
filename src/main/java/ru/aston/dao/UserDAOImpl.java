@@ -1,5 +1,6 @@
 package ru.aston.dao;
 
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class UserDAOImpl implements UserDAO {
+
+    public UserDAOImpl(EntityManagerFactory emf) {
+    }
 
     @Override
     public void persist(User user) {
